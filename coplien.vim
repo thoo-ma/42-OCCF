@@ -81,7 +81,7 @@ let s:class = [
 	\ "};",
 \]
 
-function! s:occf()
+function! s:coplienform()
 	if &filetype == 'cpp'
 		call append(0, s:assignation_operator_definition) | call append(0, "")
 		call append(0, s:operator_header)                 | call append(0, "")
@@ -103,7 +103,7 @@ function! s:occf()
 	endif
 endfunction
 
-command! OCCF call s:occf ()
+command! CoplienForm call s:coplienform ()
 
 au BufNewFile,BufRead *.hpp set filetype=hpp " override (cf. :help new-filetype)
 au BufNewFile,BufRead *.hpp set syntax=cpp " line above switch off highlight
