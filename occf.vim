@@ -57,6 +57,7 @@ let s:assignation_operator_definition = [
 let s:ifndef = "#ifndef " . toupper(s:basename) . "_HPP"
 let s:define = "#define " . toupper(s:basename) . "_HPP"
 let s:endif = "#endif /* " . toupper(s:basename) . "_HPP */"
+let s:include = "#include \"" . s:basename . ".hpp\""
 
 " Declarations
 let s:copy_constructor_declaration = "    " . s:basename . "(" . s:basename . " const & a);"
@@ -89,7 +90,8 @@ function! s:occf()
 		call append(0, s:default_constructor_definition)  | call append(0, "")
 		call append(0, s:copy_constructor_definition)     | call append(0, "")
 		call append(0, s:constructor_header)              | call append(0, "")
-		call append(0, s:member_function_header)
+		call append(0, s:member_function_header)          | call append(0, "")
+		call append(0, s:include)
 		"call append(0, s:static_function_header)
 	elseif &filetype == 'hpp'
 		call append(0, s:endif)  | call append(0, "")
