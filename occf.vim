@@ -92,13 +92,14 @@ function! s:occf()
 		call append(0, s:constructor_header)              | call append(0, "")
 		call append(0, s:member_function_header)          | call append(0, "")
 		call append(0, s:include)
+		:$ delete 1 " remove last line
 		"call append(0, s:static_function_header)
 	elseif &filetype == 'hpp'
 		call append(0, s:endif)  | call append(0, "")
 		call append(0, s:class)  | call append(0, "")
 		call append(0, s:define)
 		call append(0, s:ifndef)
-		"call append(line('$'), "lol")
+		:$ delete 1 " remove last line
 	endif
 endfunction
 
