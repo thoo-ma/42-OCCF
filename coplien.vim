@@ -41,6 +41,7 @@ let s:operator_header = [
 " Filename
 let s:filename = expand("%:t")
 let s:basename = expand("%:r")
+let s:extension = expand("%:e")
 
 " Definitions
 let s:default_constructor_definition = s:basename . "::" . s:basename . "(void) { }"
@@ -82,7 +83,7 @@ let s:class = [
 \]
 
 function! s:coplienform()
-	if &filetype == 'cpp'
+	if s:extension == 'cpp'
 		call append(0, s:assignation_operator_definition) | call append(0, "")
 		call append(0, s:operator_header)                 | call append(0, "")
 		call append(0, s:destructor_definition)           | call append(0, "")
@@ -94,7 +95,7 @@ function! s:coplienform()
 		call append(0, s:include)
 		:$ delete 1 " remove last line
 		"call append(0, s:static_function_header)
-	elseif &filetype == 'hpp'
+    elseif s:extension == 'hpp'
 		call append(0, s:endif)  | call append(0, "")
 		call append(0, s:class)  | call append(0, "")
 		call append(0, s:define)
@@ -104,6 +105,3 @@ function! s:coplienform()
 endfunction
 
 command! CoplienForm call s:coplienform ()
-
-au BufNewFile,BufRead *.hpp set filetype=hpp " override (cf. :help new-filetype)
-au BufNewFile,BufRead *.hpp set syntax=cpp " line above switch off highlight
